@@ -31,7 +31,7 @@ public class UpdateUserTo implements Task {
                                 .relaxedHTTPSValidation())
         );
         if (SerenityRest.lastResponse().statusCode() == 200) {
-            LOGGER.info("Response de la peticion: " + SerenityRest.lastResponse().asString());
+            LOGGER.info("Petición exitosa, response de la peticion: " + SerenityRest.lastResponse().asString());
         } else {
             LOGGER.info("Error al momento de hacer la petición, este es el response: "
                     + SerenityRest.lastResponse().asString());

@@ -1,35 +1,38 @@
 package com.reto.tecnico.tasks;
 
-
 import com.reto.tecnico.models.User;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.rest.interactions.Post;
+import net.serenitybdd.screenplay.rest.interactions.Delete;
 
 import java.util.logging.Logger;
 
-import static com.reto.tecnico.utils.Constant.APP_ID;
+public class DeleteUserTo implements Task {
 
-public class CreateUserTo implements Task {
-
-    private static final Logger LOGGER = Logger.getLogger(CreateUserTo.class.getName());
-    private User user;
+    private static final Logger LOGGER = Logger.getLogger(DeleteUserTo.class.getName());
     private String path;
     private String appId;
+    private String idUser;
+    private User user;
 
-    public CreateUserTo(User user, String path, String appId) {
-        this.user = user;
+    public DeleteUserTo(User user, String path, String appId, String idUser) {
         this.path = path;
         this.appId = appId;
+        this.idUser = idUser;
+        this.user = user;
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        LOGGER.info("Realizando Creacion del usuario " + user.firstName);
-        actor.attemptsTo(Post.to(path).with(requestSpecification ->
-                requestSpecification.header("app-id", appId)
-                        .body(user).relaxedHTTPSValidation()));
+        LOGGER.info("Eliminando el usuario con el id " + idUser);
+        actor.attemptsTo(
+                Delete.from(path.concat(idUser)).with(
+                        requestSpecification -> requestSpecification
+                                .header("app-id", appId)
+                                .relaxedHTTPSValidation()
+                )
+        );
         if (SerenityRest.lastResponse().statusCode() == 200) {
             LOGGER.info("Petición exitosa, response de la peticion: " + SerenityRest.lastResponse().asString());
         } else {
@@ -38,5 +41,5 @@ public class CreateUserTo implements Task {
         }
         SerenityRest.lastResponse().prettyPrint();
     }
-
 }
+

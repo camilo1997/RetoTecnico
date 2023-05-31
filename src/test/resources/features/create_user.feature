@@ -1,4 +1,4 @@
-Feature: Create user in dummyapi
+Feature: Create user
 
   Background: setUp
     Given I have access to the service
