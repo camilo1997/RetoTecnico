@@ -3,17 +3,16 @@ package com.reto.tecnico.stepdefinitions;
 import com.reto.tecnico.models.User;
 import com.reto.tecnico.questions.GetLastResponse;
 import com.reto.tecnico.questions.GetStatusCode;
-import com.reto.tecnico.tasks.CreateUser;
+import com.reto.tecnico.tasks.CreateUserTo;
+import com.reto.tecnico.tasks.builder.CreateUser;
 import com.reto.tecnico.utils.Generate;
 import io.cucumber.java.en.*;
-import io.cucumber.java.it.Ma;
-import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import org.hamcrest.Matchers;
 
-import static com.reto.tecnico.utils.Constant.URL;
+import static com.reto.tecnico.utils.Constant.*;
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.actors.OnStage.*;
 import static org.hamcrest.Matchers.*;
@@ -31,7 +30,7 @@ public class CreateUserStepDefinitions {
     public void iCreateAUserWithCorrectData() {
         User user = Generate.user();
         theActorInTheSpotlight().remember("user", user);
-        theActorInTheSpotlight().attemptsTo(CreateUser.withData(user));
+        theActorInTheSpotlight().attemptsTo(CreateUser.withData(PATH_USER_CREATE,APP_ID).AndWith(user));
     }
 
     @Then("I see the response code {int}")
@@ -57,7 +56,7 @@ public class CreateUserStepDefinitions {
     @When("I create user without email incorrect")
     public void iCreateUserWithoutEmailIncorrect() {
         User user = Generate.userWithEmailIncorrect();
-        OnStage.theActorInTheSpotlight().attemptsTo(CreateUser.withData(user));
+        OnStage.theActorInTheSpotlight().attemptsTo(CreateUser.withData(PATH_USER_CREATE,APP_ID).AndWith(user));
             }
     @Then("I see the invalid email message")
     public void iSeeTheInvalidEmailMessage() {
@@ -70,7 +69,7 @@ public class CreateUserStepDefinitions {
     @When("I create user without email")
     public void iCreateUserWithoutEmail() {
         User user = Generate.userWithoutEmail();
-        theActorInTheSpotlight().attemptsTo(CreateUser.withData(user));
+        theActorInTheSpotlight().attemptsTo(CreateUser.withData(PATH_USER_CREATE,APP_ID).AndWith(user));
     }
     @Then("I see the message email is required")
     public void iSeeTheMessageEmailIsRequired() {
@@ -83,7 +82,7 @@ public class CreateUserStepDefinitions {
     public void iCreateUserWithEmailAlreadyUsed() {
         User user = Generate.user();
         user.setEmail("test@test.com");
-        theActorInTheSpotlight().attemptsTo(CreateUser.withData(user));
+        theActorInTheSpotlight().attemptsTo(CreateUser.withData(PATH_USER_CREATE,APP_ID).AndWith(user));
     }
     @Then("I see the message Email already use")
     public void iSeeTheMessageEmailAlreadyUse() {
