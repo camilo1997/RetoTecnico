@@ -26,4 +26,13 @@ public class Generate {
      public static User userWithoutEmail(){
         return new User(FAKER.name().firstName(), FAKER.name().lastName());
      }
+     public static String idIncorrect(){
+        return FAKER.bothify("######");
+     }
+    public static String appIdIncorrect(){
+        return FAKER.bothify("##########");
+    }
+    public static String pathIncorrect(){
+        return FAKER.bothify("????????");
+    }
 }

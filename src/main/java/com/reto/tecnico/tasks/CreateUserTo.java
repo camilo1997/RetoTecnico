@@ -30,9 +30,13 @@ public class CreateUserTo implements Task {
         actor.attemptsTo(Post.to(path).with(requestSpecification ->
                 requestSpecification.header("app-id", appId)
                         .body(user).relaxedHTTPSValidation()));
+        if (SerenityRest.lastResponse().statusCode() == 200) {
+            LOGGER.info("Response de la peticion: " + SerenityRest.lastResponse().asString());
+        } else {
+            LOGGER.info("Error al momento de hacer la petición, este es el response: "
+                    + SerenityRest.lastResponse().asString());
+        }
         SerenityRest.lastResponse().prettyPrint();
-        LOGGER.info("Response de la petición: " + SerenityRest.lastResponse().asString() + "con un status code: "
-                + SerenityRest.lastResponse().statusCode());
     }
 
 }

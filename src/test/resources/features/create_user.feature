@@ -28,3 +28,14 @@ Feature: Create user in dummyapi
     Then I see the response code 400
     And I see the message Email already use
 
+  @CreateUserWithAppIdIncorrect
+  Scenario: Create user with app-id incorrect
+    When I create user with appid incorrect
+    Then I see the response code 403
+    And I see that message error id not exist
+
+  @CreateUserWithPathIncorrect
+  Scenario: Create user with path incorrect
+    When I create user with path incorrect
+    Then I see the response code 404
+    And I see that message error path not found
