@@ -1,12 +1,10 @@
 package com.reto.tecnico.tasks;
 
-import jdk.nashorn.internal.runtime.options.LoggingOption;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 
-import java.util.PrimitiveIterator;
 import java.util.logging.Logger;
 
 public class GetUserTo implements Task {
