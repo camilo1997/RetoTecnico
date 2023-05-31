@@ -33,7 +33,6 @@ pipeline {
                 alwaysLinkToLastBuild: true,
                 allowMissing: false
             ])
-            //sendSlackNotification(currentBuild.result);
         }
      }
         
