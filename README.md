@@ -13,6 +13,7 @@ Este es un proyecto Maven donde se usan los principales verbos GET,POST,PUT, DEL
 * Serenity Rest con Serenity y Screenplay.
 * Hamcrest.
 * Patron de diseño Screenplay.
+* Patron builder
 
 ## Ejecución local
 ***
