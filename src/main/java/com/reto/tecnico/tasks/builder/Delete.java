@@ -9,21 +9,26 @@ import net.serenitybdd.screenplay.Tasks;
 public class Delete {
     private String path;
     private String appId;
+    private String userId;
 
 
-    public Delete(String path, String appId) {
+    public Delete(String path) {
         this.path = path;
-        this.appId = appId;
     }
 
-
-
-    public static Delete withData(String path, String appId){
-        return new Delete(path, appId);
+    public static Delete withPath(String path){
+        return new Delete(path);
+    }
+    public Delete andAppId(String appId){
+        this.appId=appId;
+        return this;
+    }
+    public Delete andUserId(String userId){
+        this.userId=userId;
+        return this;
     }
 
-
-    public DeleteUserTo AndWith(User user, String userId){
+    public DeleteUserTo AndUser(User user){
         return Tasks.instrumented(DeleteUserTo.class, user, path, appId, userId);
     }
 }

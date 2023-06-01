@@ -21,10 +21,10 @@ public class DeleteUserStepDefinitions {
     @When("I delete user existing")
     public void iDeleteUserExisting() {
         User user = user();
-        theActorInTheSpotlight().attemptsTo(Create.withData(PATH_USER_CREATE,APP_ID).AndWith(user));
+        theActorInTheSpotlight().attemptsTo(Create.withPath(PATH_USER_CREATE).andAppId(APP_ID).andUser(user));
         String userId = theActorInTheSpotlight().asksFor(GetUserId.ofResponse());
         theActorInTheSpotlight().remember("userId", userId);
-        theActorInTheSpotlight().attemptsTo(Delete.withData(PATH_USER,APP_ID).AndWith(user,userId));
+        theActorInTheSpotlight().attemptsTo(Delete.withPath(PATH_USER).andAppId(APP_ID).andUserId(userId).AndUser(user));
     }
     @Then("I see that id user")
     public void iSeeThatIdUser() {
@@ -35,6 +35,6 @@ public class DeleteUserStepDefinitions {
     public void iDeleteUserThatNotExist() {
         User user = user();
         String userId = Generate.idIncorrect();
-        theActorInTheSpotlight().attemptsTo(Delete.withData(PATH_USER,APP_ID).AndWith(user,userId));
+        theActorInTheSpotlight().attemptsTo(Delete.withPath(PATH_USER).andAppId(APP_ID).andUserId(userId).AndUser(user));
     }
 }

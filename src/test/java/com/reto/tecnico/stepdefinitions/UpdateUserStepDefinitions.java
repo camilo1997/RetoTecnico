@@ -22,12 +22,12 @@ public class UpdateUserStepDefinitions {
     @When("I update an existing user")
     public void iUpdateAnExistingUser() {
         User user = user();
-        theActorInTheSpotlight().attemptsTo(Create.withData(PATH_USER_CREATE,APP_ID).AndWith(user));
+        theActorInTheSpotlight().attemptsTo(Create.withPath(PATH_USER_CREATE).andAppId(APP_ID).andUser(user));
         User newUser = user();
         String userId = theActorInTheSpotlight().asksFor(GetUserId.ofResponse());
         theActorInTheSpotlight().remember("userId", userId);
         theActorInTheSpotlight().remember("newUser", newUser);
-        theActorInTheSpotlight().attemptsTo(Update.withData(PATH_USER.concat(userId),APP_ID).AndWith(newUser));
+        theActorInTheSpotlight().attemptsTo(Update.withPath(PATH_USER.concat(userId)).andAppId(APP_ID).andUser(newUser));
     }
     @Then("I see new updated user data")
     public void iSeeNewUpdatedUserData() {
@@ -42,7 +42,7 @@ public class UpdateUserStepDefinitions {
     @When("I update user not existing")
     public void iUpdateUserNotExisting() {
         User user = user();
-        theActorInTheSpotlight().attemptsTo(Update.withData(PATH_USER.concat(idIncorrect()),APP_ID).AndWith(user));
+        theActorInTheSpotlight().attemptsTo(Update.withPath(PATH_USER.concat(idIncorrect())).andAppId(APP_ID).andUser(user));
     }
 
 }

@@ -9,15 +9,19 @@ public class Update {
     private String path;
     private String appId;
 
-    public Update(String path, String appId) {
+    public Update(String path) {
         this.path = path;
-        this.appId = appId;
-    }
-    public static Update withData(String path, String appId){
-        return new Update(path, appId);
     }
 
-    public UpdateUserTo AndWith(User user){
+    public static Update withPath(String path){
+        return new Update(path);
+    }
+    public Update andAppId(String appId){
+        this.appId=appId;
+        return this;
+    }
+
+    public UpdateUserTo andUser(User user){
         return Tasks.instrumented(UpdateUserTo.class, user, path, appId);
     }
 }

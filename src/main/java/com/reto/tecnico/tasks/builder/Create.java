@@ -9,15 +9,18 @@ public class Create {
     private String path;
     private String appId;
 
-    public Create(String path, String appId) {
+    public Create(String path) {
         this.path = path;
-        this.appId = appId;
     }
-    public static Create withData(String path, String appId){
-        return new Create(path, appId);
+    public static Create withPath(String path){
+        return new Create(path);
+    }
+    public Create andAppId(String appId){
+        this.appId=appId;
+        return this;
     }
 
-    public CreateUserTo AndWith(User user){
+    public CreateUserTo andUser(User user){
         return Tasks.instrumented(CreateUserTo.class, user, path, appId);
     }
 }
